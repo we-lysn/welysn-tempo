@@ -20,6 +20,6 @@ storage:
       s3:
         bucket: welysn-tempo-db
         region: ap-southeast-2
-        endpoint: drtmwdsmjmmmoinlbktm.supabase.co
+        endpoint: drtmwdsmjmmmoinlbktm.supabase.co/storage
         access_key: ${S3_ACCESS_KEY_ID}
         secret_key: ${S3_SECRET_ACCESS_KEY}
