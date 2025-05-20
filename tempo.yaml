@@ -12,23 +12,15 @@ distributor:
 
 ingester:
   trace_idle_period: 10s
-  max_block_duration: 5m
-
-compactor:
-  compaction:
-    block_retention: 1h
+  max_block_duration: 30m
 
 storage:
   trace:
-    backend: local
-    local:
-      path: /tmp/tempo
-
-metrics_generator:
-  registry:
-    external_labels:
-      source: tempo
-  storage:
-    path: /tmp/tempo/generator/wal
-    remote_write:
-      - url: http://prometheus:9090/api/v1/write
+      backend: s3
+      s3:
+        bucket: ${AWS_BUCKET_NAME}
+        endpoint: ${AWS_ENDPOINT}
+        access_key: ${AWS_ACCESS_KEY_ID}
+        secret_key: ${AWS_SECRET_ACCESS_KEY}
+        insecure: true
+        enable_dual_stack: true
