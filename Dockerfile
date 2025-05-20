@@ -1,9 +1,29 @@
-FROM ubuntu/tempo:2.7.1-24.04_stable
+# Stage 1: Use Alpine to install gettext (for envsubst)
+FROM alpine:3.19 as tools
+RUN apk add --no-cache gettext
+
+# Stage 2: Pull official Tempo image
+FROM grafana/tempo:latest as tempo-base
+
+# Stage 3: Final image: Alpine + Tempo + gettext
+FROM alpine:3.19
 
 USER root
 
-RUN apt-get update && \
-    apt-get install -y gettext
+# Copy tempo binary and busybox shell
+COPY --from=tempo-base /tempo /tempo
+COPY --from=tempo-base /busybox /busybox
+
+# Copy envsubst (gettext tool)
+COPY --from=tools /usr/bin/envsubst /usr/bin/envsubst
+
+# Set env
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/busybox"
+
+# Add CA certs if needed
+RUN apk add --no-cache ca-certificates
+
+RUN apk add --no-cache gettext
 
 # Copy the configuration file
 COPY tempo.yaml /etc/tempo.yaml
@@ -12,7 +32,4 @@ COPY tempo.yaml /etc/tempo.yaml
 EXPOSE 3200
 EXPOSE 4317
 
-RUN envsubst < /etc/tempo.yaml > /tmp/tempo.yaml
-
-# Set the environment variable for Tempo configuration
-CMD ["-config.file=/tmp/tempo.yaml"]
+ENTRYPOINT ["/bin/sh", "-c", "envsubst < /etc/tempo.yaml > /tmp/tempo.yaml && exec /tempo -config.file=/tmp/tempo.yaml"]
