@@ -11,8 +11,5 @@ RUN chmod +x /entrypoint.sh
 EXPOSE 3200
 EXPOSE 4317
 
-# Set the entrypoint
+# Set the environment variable for Tempo configuration
 ENTRYPOINT ["/entrypoint.sh"]
-
-# Set the command to run Tempo with the configuration file
-CMD ["-config.file=/etc/tempo.yaml"]
