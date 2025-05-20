@@ -14,4 +14,4 @@ EXPOSE 3200
 EXPOSE 4317
 
 # Set the environment variable for Tempo configuration
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/entrypoint.sh"]
