@@ -18,9 +18,5 @@ storage:
   trace:
       backend: s3
       s3:
-        bucket: ${AWS_BUCKET_NAME}
-        endpoint: ${AWS_ENDPOINT}
-        access_key: ${AWS_ACCESS_KEY_ID}
-        secret_key: ${AWS_SECRET_ACCESS_KEY}
         insecure: true
         enable_dual_stack: true
