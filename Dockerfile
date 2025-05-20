@@ -1,5 +1,7 @@
 FROM grafana/tempo:latest
 
+USER root
+
 # Copy the configuration file
 COPY tempo.yaml /etc/tempo.yaml
 
