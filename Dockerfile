@@ -8,11 +8,14 @@ USER root
 # Copy the configuration file
 COPY tempo.yaml /etc/tempo.yaml
 
+COPY entrypoint.sh /entrypoint.sh
+
 # Expose the necessary ports
 EXPOSE 3200
 EXPOSE 4317
 
-RUN envsubst < /etc/tempo.yaml
+# RUN envsubst < /etc/tempo.yaml
 
 # Set the environment variable for Tempo configuration
-CMD ["-config.file=/etc/tempo.yaml"]
+# CMD ["-config.file=/etc/tempo.yaml"]
+ENTRYPOINT ["/entrypoint.sh"]
