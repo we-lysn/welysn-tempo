@@ -2,15 +2,11 @@ FROM ubuntu/tempo:2.7.1-24.04_stable
 
 USER root
 
-# RUN apt-get update && \
-#     apt-get install -y gettext
+RUN apt-get update && \
+    apt-get install -y gettext
 
 # Copy the configuration file
 COPY tempo.yaml /etc/tempo.yaml
-
-COPY entrypoint.sh /entrypoint.sh
-
-RUN chmod +x /entrypoint.sh
 
 # Expose the necessary ports
 EXPOSE 3200
