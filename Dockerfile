@@ -10,6 +10,8 @@ COPY tempo.yaml /etc/tempo.yaml
 
 COPY entrypoint.sh /entrypoint.sh
 
+RUN chmod +x /entrypoint.sh
+
 # Expose the necessary ports
 EXPOSE 3200
 EXPOSE 4317
