@@ -2,8 +2,8 @@ FROM grafana/tempo:latest
 
 USER root
 
-RUN apt-get update && \
-    apt-get install -y gettext
+# RUN apt-get update && \
+#     apt-get install -y gettext
 
 # Copy the configuration file
 COPY tempo.yaml /etc/tempo.yaml
