@@ -19,6 +19,6 @@ storage:
       backend: s3
       s3:
         bucket: welysn-tempo-db
-        endpoint: drtmwdsmjmmmoinlbktm.supabase.co/storage/v1/s3
+        endpoint: drtmwdsmjmmmoinlbktm.supabase.co
         access_key: ${S3_ACCESS_KEY_ID}
         secret_key: ${S3_SECRET_ACCESS_KEY}
