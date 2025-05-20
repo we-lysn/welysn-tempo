@@ -1,4 +1,4 @@
-FROM grafana/tempo:latest
+FROM ubuntu/tempo:2.7.1-24.04_stable
 
 USER root
 
@@ -16,8 +16,7 @@ RUN chmod +x /entrypoint.sh
 EXPOSE 3200
 EXPOSE 4317
 
-# RUN envsubst < /etc/tempo.yaml
+RUN envsubst < /etc/tempo.yaml > /tmp/tempo.yaml
 
 # Set the environment variable for Tempo configuration
-# CMD ["-config.file=/etc/tempo.yaml"]
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["-config.file=/tmp/tempo.yaml"]
