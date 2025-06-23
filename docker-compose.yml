@@ -2,8 +2,8 @@ services:
   tempo:
     build: ./
     ports:
-      - "[::1]:3200:3200" # Tempo HTTP server
-      - "[::1]:4317:4317" # OTLP gRPC (not used here, but available)
+      - "[::1]:${TEMPO_HTTP_SERVER_PORT}:3200" # Tempo HTTP server
+      - "[::1]:${OTLP_GRPC_PORT}:4317" # OTLP gRPC (not used here, but available)
     command: ["-config.file=/etc/tempo.yaml", "-config.expand-env=true"]
     volumes:
       - ./tempo.yaml:/etc/tempo.yaml

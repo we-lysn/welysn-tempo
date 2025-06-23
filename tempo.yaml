@@ -1,14 +1,14 @@
 server:
-  http_listen_port: 3200
+  http_listen_port: ${TEMPO_HTTP_SERVER_PORT}
 
 distributor:
   receivers:
     otlp:
       protocols:
         http:
-          endpoint: "0.0.0.0:4318"
+          endpoint: "0.0.0.0:${OLTP_HTTP_PORT}"
         grpc:
-          endpoint: "0.0.0.0:4317"
+          endpoint: "0.0.0.0:${OTLP_GRPC_PORT}"
 
 ingester:
   trace_idle_period: 10s
